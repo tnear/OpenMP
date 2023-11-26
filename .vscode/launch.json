@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe", // Output file name
+            "args": [], // Command line arguments passed to the program
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal"
+            //"preLaunchTask": "Your build task name", // Update with your build task name if needed
+        }
+    ]
+}
