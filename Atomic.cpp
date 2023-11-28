@@ -2,7 +2,8 @@
 Atomic: a form of synchronization where only one thread
 at a time can execute a critical region.
 
-Atomic is faster than critical, but only supports these operations:
+Atomic is faster than critical, but only supports these operations
+for a single variable:
 x binop= expr (ex: x *= 2)
 x++
 ++x
@@ -33,7 +34,7 @@ void testSumInRange()
     for (int i = 0; i < 100; ++i)
     {
         #pragma omp atomic
-        sum += 1; // Atomic addition
+        sum += 1; // atomic addition
     }
 
     cout << sum << '\n';
