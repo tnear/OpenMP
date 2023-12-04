@@ -51,7 +51,7 @@ void single()
         #pragma omp single
         {
             cout << "This is executed by a single thread (Thread " << thread_id << ").\n";
-        } // <-- implicit barrier here
+        } // <-- implicit barrier here for single (unlike master)
 
         // all threads execute this part after the single block is completed
         #pragma omp critical

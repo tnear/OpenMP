@@ -5,8 +5,8 @@
             "label": "Build active file",
             "command": "clang++.exe",
             "args": [
-                "-g",            
-                "-fopenmp",           
+                "-g",          // debug info
+                "-fopenmp",    // use OpenMP
                 "-std=c++20",
                 "-Wall",
                 "${file}",
