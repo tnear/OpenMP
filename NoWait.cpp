@@ -1,7 +1,7 @@
 /*
 nowait is used to specify that threads do not need to wait at the end of
 a work-sharing construct. Normally, OpenMP includes an implicit barrier
-at the end of these constructs to ensure all threads have completed their
+at the end of parallel constructs to ensure all threads have completed their
 work before proceeding. The nowait clause removes this implicit barrier,
 allowing threads to continue without waiting for others.
 https://www.openmp.org/spec-html/5.2/openmpse94.html
@@ -31,6 +31,7 @@ Thread 2 reached the end of the parallel for.
 Thread 1 processing iteration 1
 Thread 1 reached the end of the parallel for.
 */
+
 // nowait is most useful for nested omp sections where the inner section
 // does not need to wait at the end of its scope
 void noWait()

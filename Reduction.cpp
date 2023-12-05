@@ -20,7 +20,6 @@ Supported identifiers include: +, -, *, &, |, ^, &&, ||, max, min
 
 using namespace std;
 
-
 void sumArray()
 {
     constexpr int SIZE = 100;

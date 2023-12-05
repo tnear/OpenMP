@@ -50,11 +50,11 @@ void master()
             cout << "Thread " << thread_id << " is starting work.\n";
         }
 
-        // Only the master thread executes (other threads skip and do not wait)
+        // only the master thread executes (other threads skip and do not wait)
         #pragma omp master
         {
             cout << "Only the master (Thread " << thread_id << ") performs this task.\n";
-        }
+        } // <-- no barrier here for master
 
         // all threads execute this
         #pragma omp critical

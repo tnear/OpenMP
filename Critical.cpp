@@ -3,7 +3,7 @@ Critical: a form of synchronization where only one thread
 at a time can execute a critical region.
 
 Critical is slower than Atomic, but supports all operations.
-See Atomic.cpp for examples of what it supports
+See Atomic.cpp for examples of what atomic supports
 
 https://www.openmp.org/spec-html/5.0/openmpsu89.html
 #pragma omp critical [(name) [[,] hint(hint-expression)] ]

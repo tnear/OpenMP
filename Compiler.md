@@ -1,6 +1,6 @@
 # Compiler
 
-Compiling with the `-fopenmp` flag translates the `#pragma` constructs into native threads.
+Compiling with the `-fopenmp` flag translates the `#pragma omp` constructs into native threads.
 
 https://www.openmp.org/wp-content/uploads/Intro_To_OpenMP_Mattson.pdf
 

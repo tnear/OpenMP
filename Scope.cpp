@@ -32,10 +32,17 @@ Outside parallel region, sharedVar is: 10
 */
 void privateExample()
 {
-    int sharedVar = 10; // a shared variable by default
+    int sharedVar = -10101; // a shared variable by default
 
-    #pragma omp parallel private(sharedVar) num_threads(3) // sharedVar is now private to each thread
+    // set sharedVar to private
+    #pragma omp parallel private(sharedVar) num_threads(3)
     {
+        // sharedVar is now private to each thread
+        // important note: sharedVar is uninitialized in this block.
+        // it is not guaranteed to inherit the value before the block.
+        assert(sharedVar != -10101);
+
+        // set sharedVar based on thread_id
         int thread_id = omp_get_thread_num();
         sharedVar = thread_id * 2; // Each thread modifies its own copy of sharedVar
 
@@ -47,13 +54,57 @@ void privateExample()
 
     // because each thread had a private copy of sharedVar, its value outside
     // the omp directive is unchanged
-    assert(sharedVar == 10);
-    cout << "Outside parallel region, sharedVar is: " << sharedVar << endl;
+    assert(sharedVar == -10101);
+    cout << "Outside parallel region, sharedVar is: " << sharedVar << "\n\n";
+}
+
+// with firstprivate, the value is copy constructed. each thread starts with a copy of the initial value
+void firstPrivate()
+{
+    omp_set_num_threads(3);
+    int x = -10101;
+
+    // each thread inherits x=-10101 for firstprivate
+    #pragma omp parallel firstprivate(x)
+    {
+        cout << "Thread " << omp_get_thread_num() << " has x (firstprivate): " << x << endl;
+        assert(x == -10101);
+    }
+
+    // reset x
+    x = -10101;
+
+    // threads do not inherit x=-10101
+    #pragma omp parallel private(x)
+    {
+        assert(x != -10101);
+        cout << "Thread " << omp_get_thread_num() << " has x (private): " << x << endl;
+    }
+}
+
+// lastprivate uses the last value of an omp parallel for execution
+void lastPrivate()
+{
+    omp_set_num_threads(3);
+
+    int last = -1;
+    #pragma omp parallel for lastprivate(last)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            last = i;
+        }
+    }
+
+    // the last value of the loop above is 3, so last equals that value
+    assert(last == 3);
 }
 
 void test()
 {
     privateExample();
+    firstPrivate();
+    lastPrivate();
 }
 
 int main()
