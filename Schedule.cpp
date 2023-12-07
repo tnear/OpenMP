@@ -1,6 +1,6 @@
 /*
 The schedule clause in OpenMP is used to specify how iterations of a
-loop are divided among the threads in a parallel region. 
+loop are divided among the threads in a parallel region.
 https://www.openmp.org/spec-html/5.0/openmpse49.html
 
 There are 4 types:
