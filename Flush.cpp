@@ -44,6 +44,7 @@ void flush()
             // thread 1 waits until flag is set and then reads data
             while (true)
             {
+                // note: flush() is needed for *both* reader and writer in OpenMP.
                 #pragma omp flush(flag)
                 if (flag == 1)
                 {

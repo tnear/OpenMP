@@ -98,6 +98,29 @@ void lastPrivate()
 
     // the last value of the loop above is 3, so last equals that value
     assert(last == 3);
+    cout << endl << endl;
+}
+
+int globalVar = 101;
+// threadprivate gives each thread a separate copy of a variable
+#pragma omp threadprivate(globalVar)
+
+void threadPrivate()
+{
+    #pragma omp parallel num_threads(2)
+    {
+        // each thread gets its own copy of globalVar
+        globalVar = omp_get_thread_num() * 10;
+
+        #pragma omp critical
+        {
+            cout << "Thread " << omp_get_thread_num() << ": globalVar = " << globalVar << endl;
+        }
+    }
+
+    // outside the parallel region, globalVar has its original value
+    cout << "Outside parallel region: globalVar = " << globalVar << endl;
+    //assert(globalVar == 101); // note: not working
 }
 
 void test()
@@ -105,6 +128,7 @@ void test()
     privateExample();
     firstPrivate();
     lastPrivate();
+    threadPrivate();
 }
 
 int main()

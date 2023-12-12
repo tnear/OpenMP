@@ -6,9 +6,9 @@ https://www.openmp.org/spec-html/5.0/openmpsu46.html
 
 Task vs Section:
 - Tasks are more suited for irregular parallelism such as through recursion.
-- Tasks have higher overhead to create and schedule
-- Sections are more suited for rigid parallelism where the # of parallel units is
-    known during compilation.
+- Tasks have higher overhead to create and schedule compared to sections.
+- Sections are more suited for rigid parallelism where the # of parallel
+    - units is known at compile-time.
 - Sections have lower overhead.
 
 Syntax:

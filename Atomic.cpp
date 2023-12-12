@@ -41,9 +41,39 @@ void testSumInRange()
     assert(sum == 100);
 }
 
+void atomicRead()
+{
+    int sharedVar = 0;
+
+    // parallel region with multiple threads
+    #pragma omp parallel num_threads(4) shared(sharedVar)
+    {
+        // only one thread writes to sharedVar
+        #pragma omp single
+        {
+            sharedVar = 101;
+        }
+
+        // simulate some work and wait for threads
+        #pragma omp barrier
+
+        int localCopy{};
+
+        // atomic read of sharedVar ensures a consistent value for the shared variable
+        #pragma omp atomic read
+        localCopy = sharedVar;
+
+        #pragma omp critical
+        {
+            cout << "Thread " << omp_get_thread_num() << " read: " << localCopy << endl;
+        }
+    }
+}
+
 void test()
 {
     testSumInRange();
+    atomicRead();
 }
 
 int main()
