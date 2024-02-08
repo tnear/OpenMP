@@ -23,11 +23,11 @@ using namespace std;
 void sumArray()
 {
     constexpr int SIZE = 100;
-    int array[SIZE];
+    int array[SIZE] = {};
 
     // create 1 to 100
     for (int i = 0; i < SIZE; ++i)
-        array[i] = i + 1; // array will contain numbers 1 to 100
+        array[i] = i + 1;
 
     int result = 0;
 
@@ -54,13 +54,13 @@ void factorial()
     }
 
     cout << "Factorial is " << result << '\n';
-    assert(result == 1307674368000);
+    assert(result == 1'307'674'368'000);
 }
 
 void maxValue()
 {
     constexpr int SIZE = 100;
-    int array[SIZE];
+    int array[SIZE] = {};
 
     // create 1 to 100
     for (int i = 0; i < SIZE; ++i)

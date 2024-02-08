@@ -39,7 +39,7 @@ void barrierExample()
 
         cout << "Thread " << thread_id << " is working...\n";
 
-        // use a barrier ot wait for all threads to complete their work
+        // use a barrier to wait for all threads to complete their work
         #pragma omp barrier
 
         // this part is executed by each thread once all have passed the barrier
