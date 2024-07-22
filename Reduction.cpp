@@ -2,7 +2,7 @@
 'reduction' specifies one or more thread-private variables
 that are subject to a reduction at the end of the parallel region
 
-ex: reduction(+ : sum)
+ex: reduction(+ : sumVar)
 states that 'sum' is the reduction variable and '+' is performed
 on all the thread-private sum variables to produce a scalar result
 
